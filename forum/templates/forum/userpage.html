@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+<h1>Page Owner</h1>
+<ul class="info">
+{% include 'account/userinfo.htmlinc' with user=userpageowner %}
+</ul>
+
+
+
+<div class="button-container">
+    <a href="{% url 'forum:userpage' userpageowner.username %}"><button>Messages</button></a>
+    <a href="{% url 'forum:userpagewithreplies' userpageowner.username %}"><button>Messages &amp; Replies</button></a>
+    {% if user.id == userpageowner.id %}
+    <a href="{% url 'account:settings' %}"><button>Settings</button></a>
+    {% endif %}
+</div>
+
+{% if user.get_username == userpageowner.username %}
+<h2>Your messages</h2>
+{% else %}
+<h2>Users messages</h2>
+{% endif %}
+
+<nav class="pagenavbar">
+    {% include 'forum/pagenavigation.htmlinc' with pagenum=pagenum %}
+</nav>
+
+<section class="messages-body">
+
+{% if user.is_authenticated %}
+{% if user.get_username == userpageowner.username %}
+{% if messageform %}
+{# <p>Create new message</p> #}
+<details>
+<summary>Create new message</summary>
+<form action="{% url 'forum:createmessage' %}" method="POST">
+    {% csrf_token %}
+    {{ messageform.as_div }}
+    <button type="submit">Send</button>
+</form>
+</details>
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% for message in messages %}
+    <article class="message">
+    {% include "forum/messagedisplay.htmlinc" with message=message %}
+    </article>
+{% endfor %}
+</section>
+
+<nav class="pagenavbar">
+    {% include 'forum/pagenavigation.htmlinc' with pagenum=pagenum %}
+</nav>
+</div>
+
+{% endblock content %}

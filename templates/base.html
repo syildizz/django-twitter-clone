@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header id="global-header">
+        <div id="logo"><a href="{% url 'forum:index' %}">Forumsite</a></div>
+        <div id="user-box">
+        {% if request.user.is_authenticated %}
+            <p id="hello-user">Hello <a href="{% url 'forum:userpage' request.user.get_username %}">{{ request.user.get_username }}</a></p>
+            <div class="button-container">
+                {# The following button does not work after Django version 5.0 due to support for logging out on GET requests being depricated. #}
+                {# https://docs.djangoproject.com/en/4.2/topics/auth/default/#django.contrib.auth.views.LogoutView #}
+                <a href="{% url 'account:logout' %}?next={{ request.path }}"><button>Logout</button></a>
+            </div>
+        {% else %}
+            <p id="hello-user">Hello guest</p>
+            <div class="button-container">
+            {% url 'account:login' as loginurl %}
+            {% url 'account:signup' as signupurl %}
+            {% if request.path != loginurl %}
+            <a href="{% url 'account:login' %}?next={{ request.path }}"><button>Login</button></a>
+            {% endif %}
+            {% if request.path != signupurl %}
+            <a href="{% url 'account:signup' %}?next={{ request.path }}"><button>Signup</button></a>
+            {% endif %}
+            </div>
+        {% endif %}
+        </div>
+    </header>
+{% block content %}
+
+{% endblock content %}
+
+<footer id="main-footer">
+    <p>Copyright &copy; 2023 SisbimProject</p>
+</footer>
+
+</body>
+</html>

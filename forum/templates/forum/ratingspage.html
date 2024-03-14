@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    {% if not messagelikes and not messagedislikes %}
+    <h2>There haven't been any rating on this message yet</h2>
+    {% else %}
+    <h2>All ratings and their corresponding users</h2>
+    <ul class="info">
+    {% for liker in messagelikes %}
+        <li><a href="{% url 'forum:userpage' liker.get_username %}">@{{ liker }}:</a> 👍</li>
+    {% endfor %}
+    {% for disliker in messagedislikes %}
+        <li><a href="{% url 'forum:userpage' disliker.get_username %}">@{{ disliker }}:</a> 👎</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+</div>
+
+{% endblock content %}

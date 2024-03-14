@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h2>User info</h2>
+<ul class="info">
+{% include 'account/userinfo.htmlinc' with user=user %}
+</ul>
+
+<h2>Change user settings</h2>
+
+<div class="messages-body">
+
+<details>
+<summary>Change user info</summary>
+{% for form in forms %}
+<form action="{% url 'account:settings' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+        <label>Change {{ field.label }}</label>
+        <div>{{ field }}</div>
+        <button type="submit" name="submit" value="{{ field.name }}">Change {{ field.label }}</button>
+     {% endfor %}
+{#    <button type="submit">Change</button> #}
+</form>
+{% endfor %}
+</details>
+
+<details>
+<summary>Change password</summary>
+<form action="{% url 'account:passwordchange' %}" method="POST">
+    {% csrf_token %}
+    {{ passwordchangeform.as_div }}
+    <button type="submit">Change password</button>
+</form>
+</details>
+
+<details>
+<summary>Delete user</summary>
+<form action="{% url 'account:deleteuser' %}" method="POST">
+    {% csrf_token %}
+    <div>
+    <label>Are you sure you want to delete your user account?</label>
+    </div>
+    <button type="submit" name="submit" value="delete">Yes, delete my user account</button>
+</form>
+</details>
+
+</div>
+
+</div>
+
+{% endblock %}

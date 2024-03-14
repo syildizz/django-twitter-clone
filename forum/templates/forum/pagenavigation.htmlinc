@@ -1,0 +1,9 @@
+    <ul>
+        {% for i in pagenum %}
+        {% if request.GET.page == i|slugify %}
+        <li class="curr-page">{{ i }}</li>
+        {% else %}
+        <li><a href="{{ request.path }}?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>

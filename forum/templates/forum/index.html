@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+<h1>Hello to Forum</h1>
+
+<nav class="pagenavbar">
+    {% include 'forum/pagenavigation.htmlinc' with pagenum=pagenum %}
+</nav>
+
+<section class="messages-body">
+{% for message in messages %}
+    <article class="message">
+    {% include "forum/messagedisplay.htmlinc" with message=message %}
+    </article>
+{% endfor %}
+</section>
+
+<nav class="pagenavbar">
+    {% include 'forum/pagenavigation.htmlinc' with pagenum=pagenum %}
+</nav>
+
+</div>
+{% endblock content %}

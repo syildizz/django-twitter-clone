@@ -1,0 +1,87 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h2>Leading Conversation</h2>
+
+<section class="messages-body">
+{% for reply in reply_chain %}
+    <article class="message">
+    {% include "forum/messagedisplay.htmlinc" with message=reply %}
+    </article>
+{% endfor %}
+</section>
+
+<h2 id="message">Message</h2>
+<section class="messages-body">
+<article class="message">
+{% include "forum/messagedisplay.htmlinc" with message=message %}
+</article>
+
+{% if user.is_authenticated %}
+<details>
+    <summary>Rate this message</summary>
+    {{ form.name.errors }}
+    <form action="{% url 'forum:ratepage' message.id %}" method="POST">
+        {{ form.name.errors }}
+        {% csrf_token %}
+            {{ ratingform.as_div }}
+        <button type="submit">Rate</button>
+    </form>
+</details>
+{% endif %}
+
+{% if user.is_authenticated %}
+<details>
+<summary>Reply here</summary>
+<form action="{% url 'forum:createmessage' message.id %}" method="POST">
+    {% csrf_token %}
+        {{ messagereplyform.as_div }}
+    <button type="submit">Reply</button>
+</form>
+</details>
+{% endif %}
+
+{% if user.is_authenticated %}
+{% if request.user == message.author %}
+<details>
+<summary>Update message</summary>
+<form action="{% url 'forum:updatemessage' message.id %}" method="POST">
+    {% csrf_token %}
+        {{ messageupdateform.as_div }}
+    <button type="submit">Update</button>
+</form>
+</details>
+{% endif %}
+{% endif %}
+
+{% if user.is_authenticated %}
+{% if request.user == message.author %}
+<details>
+<summary>Delete message</summary>
+<form action="{% url 'forum:deletemessage' message.id %}" method="POST">
+    <label>Are you sure?</label>
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+</details>
+{% endif %}
+{% endif %}
+
+</section>
+
+<h2>Replies</h2>
+<section class="messages-body">
+{% for reply in replies %}
+    <article class="message">
+    {% include "forum/messagedisplay.htmlinc" with message=reply parent_message=message %}
+    </article>
+{% endfor %}
+</section>
+
+</div>
+
+{% endblock content %}

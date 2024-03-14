@@ -1,0 +1,246 @@
+* {
+    margin: 0 auto;
+    color: var(--main-text-color);
+    box-sizing: border-box;
+    line-height: 1.5em;
+}
+
+:root {
+    --main-background-color: #333;
+    --secondary-background-color: #242424;
+    --main-text-color: #b3b3b3;
+    --main-highlight-color: #b3b3b3;
+    --secondary-text-color: brown;
+}
+
+html {
+    background-color: var(--main-background-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    background-color: inherit;
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    filter: brightness(1.4);
+}
+
+a:active {
+    filter: brightness(1);
+}
+
+button {
+    /* padding: 0.25em 0.5em; */
+    padding: 0;
+    background-color: inherit;
+    border-color: var(--main-highlight-color);
+    /* border-style: solid; */
+    border-style: none;
+    border-radius: 3px;
+    line-height: 1.5em;
+    font-size: 16px;
+    margin: 0 1em;
+}
+
+button[type="submit"]:hover {
+    filter: brightness(1.4);
+}
+
+details[open] {
+    padding-bottom: 2em;
+}
+
+details > summary {
+    padding: 1em 0;
+    /* list-style-type: none; */
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+details > summary:hover {
+    filter: brightness(1.4);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    padding: 1em 0;
+}
+
+details > form {
+    width: 100%;
+    padding: 0;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    gap: 10px;
+    width: 100%;
+}
+
+form > button {
+   width: fit-content;
+   align-self: flex-end;
+}
+
+form label {
+    color: white;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+textarea {
+    resize:none;
+    height: 15em;
+}
+
+textarea, form input {
+    background-color: var(--main-background-color);
+    border-color: #b3b3b3;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 3px;
+    resize: none;
+    padding: 10px;
+    width: 100%;
+    color: white;
+}
+
+fieldset {
+    width: fit-content;
+}
+
+fieldset > div {
+    display: flex;
+    gap: 1em;
+}
+
+fieldset > div > div {
+    display: flex;
+}
+
+fieldset input {
+    width: fit-content;
+}
+
+#global-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0;
+    border-color: var(--main-highlight-color);
+    border-style: solid;
+    border-width: 0 0 3px 0;
+    margin-bottom: 1em;
+    background-color: var(--secondary-background-color);
+}
+
+#logo {
+    width: 33%;
+    font-size: xx-large;
+    font-weight: 900;
+    color: var(--secondary-text-color);
+}
+
+#user-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0 1em;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.button-container {
+    margin: 1em 0;
+}
+
+.message {
+    margin: 1em 0;
+    padding: 1em 1em;
+    border-color: var(--main-highlight-color);
+    border-style: solid;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
+
+.messages-body {
+    width: 70%;
+}
+
+.message .poster {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: flex-start;
+/*    gap: 0 1em; */
+    margin-left: inherit
+}
+
+.message > .poster > li + li:before {
+    content: " - ";
+}
+
+.message > .poster > li:after {
+    content: "\00a0 ";
+}
+
+.message > .post-body {
+    color: #f2f2f2;
+}
+
+.info {
+    margin: 1em 0;
+    padding: 1em 1em;
+    border-color: var(--main-highlight-color);
+    border-style: solid;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
+
+nav.pagenavbar {
+    margin: 1em 0;
+}
+
+nav.pagenavbar > ul {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0 1em;
+}
+
+nav.pagenavbar > ul > li > a {
+    font-size: large;
+    font-weight: bolder;
+}
+
+nav.pagenavbar > ul > li {
+    padding: 5px;
+}
+
+nav.pagenavbar > ul > li.curr-page {
+    color: brown;
+    font-size: large;
+    font-weight: bolder;
+}
+
+footer#main-footer {
+    background-color: var(--secondary-background-color);
+    text-align: center;
+    padding: 2em 0;
+    margin-top: 16px;
+}

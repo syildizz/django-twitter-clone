@@ -1,0 +1,5 @@
+    <li>Username: {{ user.username }}</li>
+    <li>Profilename: {{ user.profile_name }}</li>
+    <li>Email: {{ user.email|default:"<em>This user has not specified an email</em>" }}</li>
+    <li>Bio: {{ user.bio|linebreaksbr|default:"<em>This user has not written a bio</em>" }}</li>
+    <li>Date joined: {{ user.date_joined|date:'j-n-Y' }}</li>

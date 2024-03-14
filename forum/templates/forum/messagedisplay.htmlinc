@@ -1,0 +1,33 @@
+    <ul class="poster">
+        {% if message.author.is_active %}
+        <li><a href="{% url 'forum:userpage' message.author.username %}"><strong>@{{ message.author }}</strong> {{ message.author.profile_name }}</a></li>
+        {% else %}
+        <li><a href="{% url 'forum:userpage' message.author.username %}"><del><strong>@{{ message.author }}</strong> {{ message.author.profile_name }}</del></a></li>
+        {% endif %}
+        <li><a href="{% url 'forum:messageinfo' message.id %}#message">#{{ message.id }}</a></li>
+        <li>{{ message.pub_date|date:'j-n-Y G.i' }}</li>
+        {% if message.edit_date %}
+        <li>Edited on {{ message.edit_date|date:'j-n-Y G.i' }}</li>
+        {% endif %}
+    </ul>
+    {% if message.reply_to_id %}
+        {% if not message.reply_to.is_active %}
+        <div><em>Replying to #<del>{{ message.reply_to_id }}</del>: This message has been deleted</em></div>
+        {% else %}
+            {% if parent_message %}
+                {% if not parent_message.is_active %}
+                <div><em>Replying to #<del>{{ parent_message.id }}</del>: This message has been deleted</em></div>
+                {% else %}
+            <div><em>Replying to <a href="{% url 'forum:messageinfo' parent_message.id %}#message">#{{ parent_message.id }}</a>: {{ parent_message.content }}</em></div>
+                {% endif %}
+            {% else %}
+        <div><em>Replying to <a href="{% url 'forum:messageinfo' message.reply_to_id %}#message">#{{ message.reply_to_id }}</a>: {{ message.reply_to.content }}</em></div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {% if message.is_active %}
+    <div class="post-body">{{ message.content|linebreaksbr|default:"<em>This message is empty</em>" }}</div>
+    {% else %}
+    <div class="post-body"><em>This message has been deleted</em></div>
+    {% endif %}
+    <div class=rating"><a href="{% url 'forum:ratingspage' message.id %}">{{ message.likes.count }}👍 {{message.dislikes.count }}👎</a></div>
