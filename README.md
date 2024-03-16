@@ -1,6 +1,6 @@
 # Django Twitter Clone
 
-This project is a Twitter clone website developed during my compulsory summer internship at [_Sisbim Teknoloji ve Yazılım Şirketi A.Ş._](https://sisbim.com/) in the summer of 2023. The project was intended for educational purposes and is not suitable for deployment in its current state.
+This project is a Twitter clone website developed in the span of a month during my compulsory summer internship at [_Sisbim Teknoloji ve Yazılım Şirketi A.Ş._](https://sisbim.com/) in the summer of 2023. The project was intended for educational purposes and is not suitable for deployment in its current state.
 
 The website is developed using the Django web framework. 
 
